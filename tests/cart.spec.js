@@ -2,23 +2,13 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../Pages/LoginPage';
 import { InventoryPage } from '../Pages/InventoryPage';
 import { CartPage } from '../Pages/CartPage.js';
-
-
-const username = 'standard_user';
-const password = 'secret_sauce';
-
-const products = [
-    "Sauce Labs Backpack",
-    "Sauce Labs Bike Light",
-    "Sauce Labs Bolt T-Shirt"
-];
-
+import {users, products } from '../testData/testData.js'
 
 
 test.beforeEach(async({page})=>{
   await page.goto("/");
   const loginPage = new LoginPage(page);
-  await loginPage.login(username,password);
+  await loginPage.login(users.standard.username,users.standard.password);
 
 }) 
 for (const product of products){

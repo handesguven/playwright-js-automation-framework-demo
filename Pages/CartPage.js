@@ -2,9 +2,10 @@ export class CartPage{
 
 
     constructor(page){
-        this.page = page,
-        this.productName = page.getByText('Sauce Labs Backpack', { exact: true }),
-        this.cartLink = page.locator("[data-test='shopping-cart-link']")
+        this.page = page;
+        this.productName = page.getByText('Sauce Labs Backpack', { exact: true });
+        this.cartLink = page.locator("[data-test='shopping-cart-link']");
+        this.checkoutButton = page.locator("#checkout");
     }
     
 
@@ -22,6 +23,11 @@ export class CartPage{
         .filter({ hasText: productName });
 
     return cartItem.locator('[data-test="inventory-item-price"]');
+}
+
+async proceedToCheckout() {
+    await this.checkoutButton.click();
+
 }
 
 }

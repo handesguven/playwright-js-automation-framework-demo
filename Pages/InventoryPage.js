@@ -2,11 +2,11 @@ export class InventoryPage{
 
 
     constructor(page){
-        this.page = page,
-        this.addBackpackButton = page.locator("#add-to-cart-sauce-labs-backpack"),
-        this.cartBadge = page.locator('[data-test="shopping-cart-badge"]'),
-        this.removeBackpackButton = page.locator('#remove-sauce-labs-backpack'),
-        this.backPackPrice = page.locator('[data-test="inventory-item-price"]').first()
+        this.page = page;
+        this.addBackpackButton = page.locator("#add-to-cart-sauce-labs-backpack");
+        this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
+        this.removeBackpackButton = page.locator('#remove-sauce-labs-backpack');
+        this.backPackPrice = page.locator('[data-test="inventory-item-price"]').first();
         
 
     }
