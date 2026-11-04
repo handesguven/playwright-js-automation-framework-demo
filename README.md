@@ -17,6 +17,7 @@ A UI test automation framework built with Playwright and JavaScript to test the 
 ## Project Structure
 
 ```text
+
 playwright-js-automation-framework-demo/
 ├── .github/
 │   └── workflows/
@@ -26,15 +27,20 @@ playwright-js-automation-framework-demo/
 │   ├── InventoryPage.js
 │   ├── CartPage.js
 │   └── CheckoutPage.js
+├── fixtures/
+│   └── baseTest.js
 ├── tests/
 │   ├── login.spec.js
 │   ├── cart.spec.js
 │   └── checkout.spec.js
 ├── testData/
 │   └── testData.js
+├── .env.example
+├── .gitignore
 ├── playwright.config.js
 ├── package.json
 └── README.md
+
 ```
 
 
@@ -58,6 +64,8 @@ playwright-js-automation-framework-demo/
 - Complete checkout with valid customer information
 - Verify order confirmation message
 - Data-driven checkout testing with multiple products
+- Negative checkout validation for required fields
+- Data-driven validation of first name, last name, and postal code
 
 
 ## Test Data Management
@@ -87,6 +95,41 @@ Each page has its own class containing locators and reusable methods.
 Test assertions are maintained in the test files, keeping test logic separate from page interactions.
 
 
+## Custom Fixtures
+
+The framework uses custom Playwright fixtures to provide
+reusable Page Object instances across tests.
+
+Defined in `fixtures/baseTest.js`:
+
+- loginPage
+- inventoryPage
+- cartPage
+- checkoutPage
+
+This approach reduces repetitive initialization code
+and improves test readability and maintainability.
+
+
+## Environment Configuration
+
+Environment variables are managed using dotenv.
+
+1. Copy `.env.example` to `.env`.
+2. Configure the application URL:
+
+```dotenv
+BASE_URL=https://www.saucedemo.com
+```
+
+The framework uses `BASE_URL` from the environment,
+with a default URL configured for CI execution.
+
+The `.env` file is excluded from Git tracking.
+
+
+
+
 ## Test Execution
 Run all tests across Chromium, Firefox, and WebKit:
 
@@ -113,6 +156,29 @@ Run Regression Tests:
 ```bash
 npm run test:regression
 ```
+
+### Debugging and Failure Artifacts
+
+The framework supports:
+
+- Playwright HTML Reports
+- Trace Viewer for step-by-step debugging
+- Screenshots on test failure
+- Video recording retained on failure
+- GitHub Actions artifacts for test reports and results
+
+Run a test with tracing enabled:
+
+```bash
+npx playwright test --project=chromium --trace on
+```
+
+Open the HTML report:
+
+```bash
+npx playwright show-report
+```
+
 
 ## CI/CD
 
