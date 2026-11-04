@@ -30,4 +30,9 @@ async proceedToCheckout() {
 
 }
 
+
+async openCartAndCheckout() {
+    await this.openCart();
+    await this.proceedToCheckout();
+}
 }

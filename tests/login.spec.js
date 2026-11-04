@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '../Pages/LoginPage';
+import { test } from '../fixtures/baseTest.js';
+import { expect } from '@playwright/test';
 import { users } from '../testData/testData.js';
  
 
@@ -9,9 +9,7 @@ test.describe("Login Functionality",()=>{
   await page.goto("/");
 }) 
 
-test("User should login successfully with valid credentials.",{tag : ["@smoke","@regression"]}, async ({page})=>{
-
-    const loginPage = new LoginPage(page);
+test("User should login successfully with valid credentials.",{tag : ["@smoke","@regression"]}, async ({page,loginPage})=>{
     await loginPage.login(users.standard.username,users.standard.password);
 
     await expect(page).toHaveURL(/inventory\.html/); //Regular expression (Regex)
@@ -20,11 +18,10 @@ test("User should login successfully with valid credentials.",{tag : ["@smoke","
 
 
 
-test("User should not login with invalid password.",{tag:"@regression"}, async ({page})=>{
+test("User should not login with invalid password.",{tag:"@regression"}, async ({loginPage})=>{
 
     const invalidPassword = "12345Hande";
-    const loginPage = new LoginPage(page);
-    await loginPage.login(users.standard.password,invalidPassword);
+    await loginPage.login(users.standard.username,invalidPassword);
     
     //assertion
 
@@ -33,9 +30,8 @@ test("User should not login with invalid password.",{tag:"@regression"}, async (
 
 });
 
-test("User should not login with empty username", async({page})=>{
+test("User should not login with empty username", async({loginPage})=>{
 
-    const loginPage = new LoginPage(page);
     await loginPage.login("",users.standard.password);
 
     await expect(loginPage.errorMessage).toHaveText("Epic sadface: Username is required");
@@ -45,9 +41,8 @@ test("User should not login with empty username", async({page})=>{
 
 
 
-test("User should not login with empty password", async({page})=>{
+test("User should not login with empty password", async({loginPage})=>{
 
-    const loginPage = new LoginPage(page);
     await loginPage.login(users.standard.username,"");
 
     await expect(loginPage.errorMessage).toHaveText("Epic sadface: Password is required");

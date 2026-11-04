@@ -8,6 +8,7 @@ export class CheckoutPage{
         this.continueButton = page.locator('#continue');
         this.finishButton = page.locator('#finish');
         this.orderConfirmation = page.getByText('Thank you for your order!', { exact: true });
+        this.errorMessage = page.locator('[data-test="error"]');
 
 
     }
