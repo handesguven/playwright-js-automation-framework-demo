@@ -9,3 +9,5 @@ node_modules/
 
 # Playwright authentication state
 playwright/.auth/
+# Environment variables
+.env
