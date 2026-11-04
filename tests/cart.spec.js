@@ -3,11 +3,13 @@ import { expect } from '@playwright/test';
 import {users, products } from '../testData/testData.js'
 
 
-test.beforeEach(async({page,loginPage})=>{
-  await page.goto("/");
-  await loginPage.login(users.standard.username,users.standard.password);
-
-}) 
+test.beforeEach(async ({ page, loginPage }) => {
+    await page.goto('/');
+    await loginPage.login(
+        users.standard.username,
+        users.standard.password
+    );
+    });
 for (const product of products){
 
 test(`User should add ${product} to cart`, {tag: "@smoke"}, async({inventoryPage,cartPage})=>{
